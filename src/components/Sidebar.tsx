@@ -1,5 +1,4 @@
 import React from "react";
-import { GiCondyluraSkull } from "react-icons/gi";
 import { GrHomeRounded } from "react-icons/gr";
 import { IoMailOutline } from "react-icons/io5";
 import { FaRegFileAlt } from "react-icons/fa";
@@ -7,59 +6,94 @@ import { HiOutlineFolderMinus } from "react-icons/hi2";
 import { AiOutlineStock } from "react-icons/ai";
 import { Link, NavLink } from "react-router-dom";
 import path from "path";
+import { contributors } from "../pages/Tasks";
+import { LuSettings } from "react-icons/lu";
+import { IoPersonOutline } from "react-icons/io5";
+import { SiConekta } from "react-icons/si";
+import { IoMdAdd } from "react-icons/io";
 
 const Sidebar: React.FC = () => {
   const navItems = [
     {
-      name: "Dashboard",
-      icon: <GrHomeRounded className="text-xl mx-3" />,
+      name: "",
+      icon: <GrHomeRounded className="w-full text-xl mx-3" style={{ marginLeft: "-0.05rem" }} />,
       path: "/dashboard",
     },
     {
-      name: "Messages",
-      icon: <IoMailOutline className="text-xl mx-3" />,
+      name: "",
+      icon: <IoMailOutline className="w-full text-xl mx-3" style={{ marginLeft: "-0.05rem" }} />,
       path: "/messages",
     },
     {
-      name: "Files",
-      icon: <FaRegFileAlt className="text-xl mx-3" />,
+      name: "",
+      icon: <FaRegFileAlt className="w-full text-xl mx-3" style={{ marginLeft: "-0.05rem" }} />,
       path: "/files",
     },
     {
-      name: "Tasks",
-      icon: <AiOutlineStock className="text-xl mx-3" />,
+      name: "",
+      icon: <HiOutlineFolderMinus className="w-full text-xl mx-3" style={{ marginLeft: "-0.05rem" }} />,
       path: "/",
     },
     {
-      name: "Overview",
-      icon: <HiOutlineFolderMinus className="text-xl mx-3" />,
+      name: "",
+      icon: <AiOutlineStock className="w-full text-xl mx-3" style={{ marginLeft: "-0.05rem" }} />,
       path: "/overview",
     },
   ];
   return (
-    <aside className="basis-2/12 h-[100vh] border-r">
-      <div className="w-[5rem] h-[5rem] flex items-center justify-center mx-auto my-2">
-        <GiCondyluraSkull className="text-7xl text-primaryColor" />
+    <aside className="h-[100vh] w-[5rem] border-r dark:border-darkComponentAccent dark:bg-darkComponent">
+      <div className="w-[4rem] h-[4rem] ms-1 flex items-center justify-center mx-auto mt-1">
+        <SiConekta className="text-2xl text-primaryColor" />
       </div>
-      <hr />
-      <nav className="my-4">
+      <nav className="mb-4">
         {navItems.map((item) => (
           <NavLink
             key={item.name}
             to={item.path}
             className={({ isActive }) =>
               `flex items-center my-1 ${
-                isActive ? "bg-gradient-to-r from-purple-100 to-white text-primaryColor" : ""
+                isActive
+                  ? "bg-gradient-to-r from-purple-100 to-white dark:from-darkBackground dark:to-darkComponent text-primaryColor"
+                  : "text-gray-500"
               }`
             }
           >
-            <div className="w-[0.4rem] h-[2.8rem] bg-primaryColor flex-shrink-0 rounded-tr-lg rounded-br-lg"></div>
-            {item.icon}
-            <span className="">{item.name}</span>
+            {({ isActive }) => (
+              <>
+                <div
+                  className={`w-[0.3rem] h-[2.4rem] flex-shrink-0 rounded-tr-lg rounded-br-lg ${
+                    isActive ? "bg-primaryColor" : "bg-transparent"
+                  }`}
+                ></div>
+                {item.icon}
+              </>
+            )}
           </NavLink>
         ))}
       </nav>
-      <hr />
+      <hr className="dark:border-gray-700" />
+      <div className="flex flex-col justify-around items-center h-[40vh] py-8">
+        {contributors.slice(3, 6).map((src, index) => (
+          <div
+            key={index}
+            className="w-9 h-9 rounded-full overflow-hidden border-2 dark:border-gray-700"
+          >
+            <img
+              src={src}
+              alt={`Avatar ${index + 1}`}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+        <div className="border border-dashed border-gray-400 p-1 rounded-full">
+          <IoMdAdd className="text-xl text-gray-500" />
+        </div>
+      </div>
+      <hr className="dark:border-gray-700" />
+      <div className="flex flex-col justify-around h-[14vh] py-2 items-center">
+        <LuSettings className="text-2xl text-gray-500" />
+        <IoPersonOutline className="text-2xl text-gray-500" />
+      </div>
     </aside>
   );
 };
