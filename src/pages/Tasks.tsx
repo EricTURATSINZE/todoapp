@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Task } from "../types/task";
 import Tabs from "../components/tabs";
+import { useTranslation } from "react-i18next";
 
 export const contributors = [
   "https://randomuser.me/api/portraits/women/68.jpg",
@@ -31,14 +32,10 @@ export const contributors = [
 const Tasks: React.FC = () => {
   const { data, error, isLoading } = useFetchData();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const appState: AppState = useSelector((state: RootState) => state.app);
 
-  console.log("Data: ", data);
-  console.log("Error: ", error);
-  console.log("IsLoading: ", isLoading);
-
   useEffect(() => {
-    console.log("Data: ", data);
     if (data?.todos?.length > 0) {
       dispatch(setTasks(data.todos));
     }
@@ -50,29 +47,29 @@ const Tasks: React.FC = () => {
         <span className="dark:text-gray-400 text-gray-400 text-sm">
           {"Workspace  >  Creative  >  "}{" "}
           <span className="text-black font-semibold dark:text-gray-200">
-            Creative Website
+            {t('creativeWebsite')}
           </span>
         </span>
         <div className="flex flex-col items-end">
           <span className="font-semibold text-sm dark:text-gray-200">
-            From 23 April
+            {t("from23April")}
           </span>
           <div className="flex items-center">
             <div className="h-2 w-2 me-2 rounded-full bg-green-500 flex-shrink-0"></div>
             <span className="text-gray-400 font-semibold text-sm">
-              Updated 12 min ago
+              {t("updated12MinAgo")}
             </span>
           </div>
         </div>
       </div>
       <header className="text-3xl font-semibold mt-2 mb-4 dark:text-gray-200">
-        Website Design
+        {t("websiteDesign")}
       </header>
       <div className="flex items-center justify-between my-2">
         <div className="flex gap-2 items-center">
           <SlLockOpen className="dark:text-gray-200" />
           <span className="font-semibold ms-2 dark:text-gray-200">
-            Limited access
+            {t("limitedAccess")}
           </span>
           <IoIosArrowDown className="dark:text-gray-200" />
           <div className="h-7 w-px bg-gray-300 flex-shrink-0 mx-1"></div>
@@ -121,11 +118,11 @@ const Tasks: React.FC = () => {
         <div className="flex gap-4">
           <button className="flex items-center gap-2 rounded-lg border dark:border-gray-400 px-3 py-1 hover:bg-primaryColor hover:text-white">
             <VscSettings className="text-xl dark:text-gray-200" />
-            <span className="text-sm dark:text-gray-200">Filter & Sort</span>
+            <span className="text-sm dark:text-gray-200">{t("filterAndSort")}</span>
           </button>
           <button className="flex items-center gap-2 rounded-lg border dark:border-gray-400 px-3 py-1 dark:text-gray-200 hover:bg-primaryColor hover:text-white">
             <IoMdAdd className="text-xl" />
-            <span className="text-sm">New Task</span>
+            <span className="text-sm">{t("newTask")}</span>
           </button>
         </div>
       </div>
@@ -179,7 +176,7 @@ const Tasks: React.FC = () => {
         />
         {appState.tasks.map((task: Task, index: number) => (
           <TaskCard
-            key={task.id}
+            key={task.id + "" + index}
             title={`Task ${index + 1} - ${task.todo.split(" ")[0]}`}
             subTitle={task.todo}
             status={

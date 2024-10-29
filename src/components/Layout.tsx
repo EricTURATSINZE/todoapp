@@ -3,13 +3,19 @@ import { RiSearch2Line } from "react-icons/ri";
 import { CiDark } from "react-icons/ci";
 import { IoNotificationsOutline } from "react-icons/io5";
 import Sidebar from "./Sidebar";
+import en from "../assets/uk.png";
+import fr from "../assets/fr.png";
 import { useDarkMode } from "../hooks/useDarkMode";
+import i18n from "../i18n";
+import store from "store";
+import { useTranslation } from "react-i18next";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const { t } = useTranslation();
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   return (
     <div className="flex h-[100vh] overflow-y-hidden">
@@ -19,12 +25,31 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="flex items-center bg-primaryGray dark:bg-darkComponentAccent px-4 py-2 rounded-lg">
             <input
               type="text"
-              placeholder="Search"
+              placeholder={t("search")}
               className="w-[15rem] me-4 bg-primaryGray dark:bg-darkComponentAccent focus:outline-none border-none"
             />
             <RiSearch2Line className="text-xl text-gray-400" />
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 items-center">
+            <figure>
+              <img
+                src={i18n.language === "en" ? en : fr}
+                alt="English"
+                className="w-6 h-5 rounded"
+              />
+            </figure>
+            <select
+              name="theme"
+              id="theme"
+              className="px-2 py-1 pr-4 rounded-lg outline-none focus:outline-none bg-primaryGray dark:bg-darkComponentAccent"
+              onChange={(selectedValue) => {
+                store.set("language", selectedValue.target.value);
+                i18n.changeLanguage(selectedValue.target.value);
+              }}
+            >
+              <option value="en">English</option>
+              <option value="fr">French</option>
+            </select>
             <div className="p-2 rounded-lg bg-primaryGray dark:bg-darkComponentAccent">
               <CiDark
                 className="cursor-pointer text-xl text-gray-500 dark:text-white"
