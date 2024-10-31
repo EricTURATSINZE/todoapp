@@ -8,10 +8,8 @@ import { CiGrid41 } from "react-icons/ci";
 import { SlLockOpen } from "react-icons/sl";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosAddCircle } from "react-icons/io";
-import { MdMoreVert } from "react-icons/md";
 import AvatarStack from "../components/AvatarStack";
 import TodoCard from "../components/TodoCard";
-import img1 from "../assets/img1.png";
 import { useFetchData } from "../store/api";
 import { AppState, setTasks } from "../store/appSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -119,6 +117,7 @@ const TodoList: React.FC = () => {
         </div>
       </div>
       <section className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 mt-4">
+        <span>Hello</span>
         {selectedTasks.map((task: Task, index: number) => (
           <TodoCard
             key={task.id + "" + index}

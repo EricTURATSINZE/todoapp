@@ -23,7 +23,7 @@ class HttpRequest {
 
       return res.data;
     } catch (err: any) {
-      console.log(err.response?.data?.message);
+      // console.log(err.response?.data?.message);
       return err;
     }
   }
@@ -37,7 +37,7 @@ class HttpRequest {
 
       return res.data;
     } catch (err: any) {
-      console.log(err.response);
+      // console.log(err.response);
       return err;
     }
   }
