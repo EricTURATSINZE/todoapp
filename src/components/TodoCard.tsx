@@ -10,11 +10,16 @@ import { AppState, setTasks } from "../store/appSlice";
 import { RootState } from "../store";
 import { toast } from "react-toastify";
 import UpdateTask from "./UpdateTask";
+import img1 from "../assets/img1.png";
+import img2 from "../assets/img2.png";
+import img3 from "../assets/img3.jpg";
+import img4 from "../assets/img4.jpg";
 
 interface TaskCardProps {
   title: string;
   task: Task;
   status: string;
+  hasImage: boolean;
   contributors: string[];
 }
 
@@ -22,6 +27,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
   title,
   task,
   contributors,
+  hasImage,
   status,
 }) => {
   const [anchorEl, setAnchorEl] = useState<SVGElement | null>(null);
@@ -35,6 +41,8 @@ const TaskCard: React.FC<TaskCardProps> = ({
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
   const closeMenu = () => setAnchorEl(null);
+
+  const images = [img1, img2, img3, img4];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -53,7 +61,9 @@ const TaskCard: React.FC<TaskCardProps> = ({
     deleteMutation.mutate(task.id, {
       onSuccess: (data) => {
         // remove task with id
-        var newTasks = appState.tasks.filter((element: Task) => element.id !== task.id);
+        var newTasks = appState.tasks.filter(
+          (element: Task) => element.id !== task.id
+        );
         dispatch(setTasks(newTasks));
         toast.success(`Task deleted successfully`, {
           position: "top-center",
@@ -85,7 +95,16 @@ const TaskCard: React.FC<TaskCardProps> = ({
 
   return (
     <>
-      <div className="p-4 mx-4 h-fit bg-white dark:bg-darkComponent rounded-2xl my-3">
+      <div className="p-4 mx-4 h-fit break-inside-avoid bg-white dark:bg-darkComponent rounded-2xl my-3">
+        {hasImage && (
+          <figure className="width-full h-[10rem] mb-4 rounded-lg">
+            <img
+              className="rounded-lg h-full w-full"
+              src={images[Math.floor(Math.random() * 4)]}
+              alt="img1"
+            />
+          </figure>
+        )}
         <div className="flex items-center justify-between">
           <div
             className={`flex bg-orange-50 ${getStatusColor(

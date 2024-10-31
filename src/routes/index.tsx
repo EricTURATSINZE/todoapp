@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import Messages from "../pages/Messages";
-import Tasks from "../pages/Todos";
+import Tasks from "../pages/TodoList";
 import Overview from "../pages/Overview";
 import Files from "../pages/Files";
 

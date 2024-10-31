@@ -22,12 +22,13 @@ import NewTask from "../components/NewTask";
 import { contributors, TabOption } from "../utils/constants";
 import Tabs from "../components/tabs";
 
-const Tasks: React.FC = () => {
+const TodoList: React.FC = () => {
   const { data, error, isLoading } = useFetchData();
   const [newTask, setNewTask] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState<TabOption>("all");
+  const [searchText, setSearchText] = useState<string>("");
   const appState: AppState = useSelector((state: RootState) => state.app);
   const [selectedTasks, setSelectedTasks] = useState<Task[]>([]);
 
@@ -99,7 +100,7 @@ const Tasks: React.FC = () => {
           <CiGrid41 className="cursor-pointer text-2xl text-primaryColor" />
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row items-center justify-between px-6 mt-4 rounded-2xl bg-white dark:bg-darkComponent">
+      <div className="flex flex-col lg:flex-row items-center justify-between px-6 my-4 rounded-2xl bg-white dark:bg-darkComponent">
         <Tabs selectedTab={selectedTab} setSelectedTab={filterTasks} />
         <div className="flex gap-4 my-4 lg:my-0">
           <button className="flex items-center gap-2 rounded-lg border dark:border-gray-400 px-3 py-1 hover:bg-primaryColor hover:text-white">
@@ -117,59 +118,13 @@ const Tasks: React.FC = () => {
           </button>
         </div>
       </div>
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4">
-        {/* <TodoCard
-          title="Footer Design"
-          subTitle="Landing Page UI"
-          status="To do"
-          contributors={contributors.slice(2, 5)}
-        />
-        <div className="p-4 me-4 bg-white dark:bg-darkComponent rounded-2xl my-3">
-          <figure className="width-full h-[10rem] mb-4 rounded-lg">
-            <img className="rounded-lg h-full w-full" src={img1} alt="img1" />
-          </figure>
-          <div className="flex items-center justify-between">
-            <div className="flex bg-orange-50 dark:bg-[#594123] text-orange-500 rounded-md px-2 items-center gap-2">
-              To do
-            </div>
-            <MdMoreVert className="text-xl text-gray-500" />
-          </div>
-          <span className="block text-xl mt-2 font-semibold dark:text-gray-200">
-            Footer Design
-          </span>
-          <span className="block mb-3 text-sm text-gray-400 font-semibold">
-            Landing Page UI
-          </span>
-          <hr className="dark:border-gray-600" />
-          <div className="flex items-center justify-between mt-3">
-            <div>
-              <AvatarStack maxVisible={3} images={contributors.slice(0, 3)} />
-            </div>
-          </div>
-        </div>
-        <TodoCard
-          title="Footer Design"
-          subTitle="Landing Page UI"
-          status="In progress"
-          contributors={contributors.slice(0, 2)}
-        />
-        <TodoCard
-          title="Footer Design"
-          subTitle="Landing Page UI"
-          status="Completed"
-          contributors={contributors.slice(0, 2)}
-        />
-        <TodoCard
-          title="Footer Design"
-          subTitle="Landing Page UI"
-          status="Completed"
-          contributors={contributors.slice(0, 2)}
-        /> */}
+      <section className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 mt-4">
         {selectedTasks.map((task: Task, index: number) => (
           <TodoCard
             key={task.id + "" + index}
-            title={`${t("task")} ${index + 1} - ${task.todo.split(" ")[0]}`}
+            title={`${t("task")} - ${task.todo.split(" ")[0]}`}
             task={task}
+            hasImage={index % 4 === 0}
             status={
               task.completed
                 ? t("completed")
@@ -188,4 +143,4 @@ const Tasks: React.FC = () => {
   );
 };
 
-export default Tasks;
+export default TodoList;
