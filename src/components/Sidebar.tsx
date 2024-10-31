@@ -12,61 +12,62 @@ import { SiConekta } from "react-icons/si";
 import { IoMdAdd } from "react-icons/io";
 import { contributors } from "../utils/constants";
 
+export const navItems = [
+  {
+    name: "Dashboard",
+    icon: (
+      <GrHomeRounded
+        className="w-full text-xl mx-3"
+        style={{ marginLeft: "-0.05rem" }}
+      />
+    ),
+    path: "/dashboard",
+  },
+  {
+    name: "Messages",
+    icon: (
+      <IoMailOutline
+        className="w-full text-xl mx-3"
+        style={{ marginLeft: "-0.05rem" }}
+      />
+    ),
+    path: "/messages",
+  },
+  {
+    name: "Files",
+    icon: (
+      <FaRegFileAlt
+        className="w-full text-xl mx-3"
+        style={{ marginLeft: "-0.05rem" }}
+      />
+    ),
+    path: "/files",
+  },
+  {
+    name: "Tasks",
+    icon: (
+      <HiOutlineFolderMinus
+        className="w-full text-xl mx-3"
+        style={{ marginLeft: "-0.05rem" }}
+      />
+    ),
+    path: "/",
+  },
+  {
+    name: "Reports",
+    icon: (
+      <AiOutlineStock
+        className="w-full text-xl mx-3"
+        style={{ marginLeft: "-0.05rem" }}
+      />
+    ),
+    path: "/overview",
+  },
+];
+
 const Sidebar: React.FC = () => {
-  const navItems = [
-    {
-      name: "",
-      icon: (
-        <GrHomeRounded
-          className="w-full text-xl mx-3"
-          style={{ marginLeft: "-0.05rem" }}
-        />
-      ),
-      path: "/dashboard",
-    },
-    {
-      name: "",
-      icon: (
-        <IoMailOutline
-          className="w-full text-xl mx-3"
-          style={{ marginLeft: "-0.05rem" }}
-        />
-      ),
-      path: "/messages",
-    },
-    {
-      name: "",
-      icon: (
-        <FaRegFileAlt
-          className="w-full text-xl mx-3"
-          style={{ marginLeft: "-0.05rem" }}
-        />
-      ),
-      path: "/files",
-    },
-    {
-      name: "",
-      icon: (
-        <HiOutlineFolderMinus
-          className="w-full text-xl mx-3"
-          style={{ marginLeft: "-0.05rem" }}
-        />
-      ),
-      path: "/",
-    },
-    {
-      name: "",
-      icon: (
-        <AiOutlineStock
-          className="w-full text-xl mx-3"
-          style={{ marginLeft: "-0.05rem" }}
-        />
-      ),
-      path: "/overview",
-    },
-  ];
   return (
-    <aside className="h-[100vh] w-[5rem] border-r dark:border-darkComponentAccent dark:bg-darkComponent">
+    <aside className="hidden md:block h-[100vh] w-[5rem] border-r dark:border-darkComponentAccent dark:bg-darkComponent">
       <div className="w-[4rem] h-[4rem] ms-1 flex items-center justify-center mx-auto mt-1">
         <SiConekta className="text-2xl text-primaryColor" />
       </div>
@@ -116,8 +117,8 @@ const Sidebar: React.FC = () => {
       </div>
       <hr className="dark:border-gray-700" />
       <div className="flex flex-col justify-around h-[14vh] py-2 items-center">
-        <LuSettings className="text-2xl text-gray-500" />
-        <IoPersonOutline className="text-2xl text-gray-500" />
+        <LuSettings className="cursor-pointer text-2xl text-gray-500" />
+        <IoPersonOutline className="cursor-pointer text-2xl text-gray-500" />
       </div>
     </aside>
   );

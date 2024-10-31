@@ -99,9 +99,9 @@ const Tasks: React.FC = () => {
           <CiGrid41 className="cursor-pointer text-2xl text-primaryColor" />
         </div>
       </div>
-      <div className="flex items-center justify-between px-6 mt-4 rounded-2xl bg-white dark:bg-darkComponent">
+      <div className="flex flex-col lg:flex-row items-center justify-between px-6 mt-4 rounded-2xl bg-white dark:bg-darkComponent">
         <Tabs selectedTab={selectedTab} setSelectedTab={filterTasks} />
-        <div className="flex gap-4">
+        <div className="flex gap-4 my-4 lg:my-0">
           <button className="flex items-center gap-2 rounded-lg border dark:border-gray-400 px-3 py-1 hover:bg-primaryColor hover:text-white">
             <VscSettings className="text-xl dark:text-gray-200" />
             <span className="text-sm dark:text-gray-200">
@@ -117,7 +117,7 @@ const Tasks: React.FC = () => {
           </button>
         </div>
       </div>
-      <section className="grid grid-cols-4 my-4">
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4">
         {/* <TodoCard
           title="Footer Design"
           subTitle="Landing Page UI"

@@ -3,7 +3,9 @@ import Layout from '../components/Layout';
 
 const Messages: React.FC = () => {
   return (
-    <Layout>Messages</Layout>
+    <Layout>
+      <span className="text-gray-700 dark:text-gray-300">Messages</span>
+    </Layout>
   );
 };
 
