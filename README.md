@@ -1,6 +1,6 @@
 # React TypeScript App with Tailwind, Redux & TanStack Query
 
-A front-end application built with **React** + **TypeScript**, styled with **Tailwind CSS**, and powered by **Redux** and **TanStack Query** for state management and data fetching.
+A todo application built with **React** + **TypeScript**, styled with **Tailwind CSS**, and powered by **Redux** and **TanStack Query** for state management and data fetching.
 
 ---
 
