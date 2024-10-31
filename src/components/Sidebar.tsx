@@ -6,37 +6,62 @@ import { HiOutlineFolderMinus } from "react-icons/hi2";
 import { AiOutlineStock } from "react-icons/ai";
 import { Link, NavLink } from "react-router-dom";
 import path from "path";
-import { contributors } from "../pages/Tasks";
 import { LuSettings } from "react-icons/lu";
 import { IoPersonOutline } from "react-icons/io5";
 import { SiConekta } from "react-icons/si";
 import { IoMdAdd } from "react-icons/io";
+import { contributors } from "../utils/constants";
 
 const Sidebar: React.FC = () => {
   const navItems = [
     {
       name: "",
-      icon: <GrHomeRounded className="w-full text-xl mx-3" style={{ marginLeft: "-0.05rem" }} />,
+      icon: (
+        <GrHomeRounded
+          className="w-full text-xl mx-3"
+          style={{ marginLeft: "-0.05rem" }}
+        />
+      ),
       path: "/dashboard",
     },
     {
       name: "",
-      icon: <IoMailOutline className="w-full text-xl mx-3" style={{ marginLeft: "-0.05rem" }} />,
+      icon: (
+        <IoMailOutline
+          className="w-full text-xl mx-3"
+          style={{ marginLeft: "-0.05rem" }}
+        />
+      ),
       path: "/messages",
     },
     {
       name: "",
-      icon: <FaRegFileAlt className="w-full text-xl mx-3" style={{ marginLeft: "-0.05rem" }} />,
+      icon: (
+        <FaRegFileAlt
+          className="w-full text-xl mx-3"
+          style={{ marginLeft: "-0.05rem" }}
+        />
+      ),
       path: "/files",
     },
     {
       name: "",
-      icon: <HiOutlineFolderMinus className="w-full text-xl mx-3" style={{ marginLeft: "-0.05rem" }} />,
+      icon: (
+        <HiOutlineFolderMinus
+          className="w-full text-xl mx-3"
+          style={{ marginLeft: "-0.05rem" }}
+        />
+      ),
       path: "/",
     },
     {
       name: "",
-      icon: <AiOutlineStock className="w-full text-xl mx-3" style={{ marginLeft: "-0.05rem" }} />,
+      icon: (
+        <AiOutlineStock
+          className="w-full text-xl mx-3"
+          style={{ marginLeft: "-0.05rem" }}
+        />
+      ),
       path: "/overview",
     },
   ];

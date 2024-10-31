@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { VscSettings } from "react-icons/vsc";
 import { IoMdAdd } from "react-icons/io";
@@ -10,36 +10,48 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoIosAddCircle } from "react-icons/io";
 import { MdMoreVert } from "react-icons/md";
 import AvatarStack from "../components/AvatarStack";
-import TaskCard from "../components/TaskCard";
+import TodoCard from "../components/TodoCard";
 import img1 from "../assets/img1.png";
 import { useFetchData } from "../store/api";
 import { AppState, setTasks } from "../store/appSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Task } from "../types/task";
-import Tabs from "../components/tabs";
 import { useTranslation } from "react-i18next";
-
-export const contributors = [
-  "https://randomuser.me/api/portraits/women/68.jpg",
-  "https://randomuser.me/api/portraits/men/12.jpg",
-  "https://randomuser.me/api/portraits/women/43.jpg",
-  "https://randomuser.me/api/portraits/men/85.jpg",
-  "https://randomuser.me/api/portraits/women/22.jpg",
-  "https://randomuser.me/api/portraits/men/54.jpg",
-];
+import NewTask from "../components/NewTask";
+import { contributors, TabOption } from "../utils/constants";
+import Tabs from "../components/tabs";
 
 const Tasks: React.FC = () => {
   const { data, error, isLoading } = useFetchData();
+  const [newTask, setNewTask] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [selectedTab, setSelectedTab] = useState<TabOption>("all");
   const appState: AppState = useSelector((state: RootState) => state.app);
+  const [selectedTasks, setSelectedTasks] = useState<Task[]>([]);
 
   useEffect(() => {
     if (data?.todos?.length > 0) {
       dispatch(setTasks(data.todos));
+      setSelectedTasks(data.todos);
     }
   }, [data, dispatch]);
+
+  useEffect(() => {
+    setSelectedTasks(appState.tasks);
+  }, [appState.tasks]);
+
+  const filterTasks = (tab: TabOption) => {
+    if (tab === "all") {
+      setSelectedTasks(appState.tasks);
+    } else if (tab === "todo") {
+      setSelectedTasks(appState.tasks.filter((task) => !task.completed));
+    } else if (tab === "completed") {
+      setSelectedTasks(appState.tasks.filter((task: Task) => task.completed));
+    }
+    setSelectedTab(tab);
+  };
 
   return (
     <Layout>
@@ -47,7 +59,7 @@ const Tasks: React.FC = () => {
         <span className="dark:text-gray-400 text-gray-400 text-sm">
           {"Workspace  >  Creative  >  "}{" "}
           <span className="text-black font-semibold dark:text-gray-200">
-            {t('creativeWebsite')}
+            {t("creativeWebsite")}
           </span>
         </span>
         <div className="flex flex-col items-end">
@@ -87,47 +99,26 @@ const Tasks: React.FC = () => {
           <CiGrid41 className="cursor-pointer text-2xl text-primaryColor" />
         </div>
       </div>
-      <div className="flex items-center justify-between px-6 py-3 mt-4 rounded-2xl bg-white dark:bg-darkComponent">
-        {/* <div className="flex gap-4">
-          <div className="flex items-center gap-1 text-primaryColor">
-            <span>All Tasks</span>
-            <div className="px-2 rounded-md bg-gray-100 dark:bg-gray-600">
-              23
-            </div>
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="dark:text-gray-200">To do</span>
-            <div className="px-2 rounded-md bg-gray-100 dark:bg-darkComponentAccent dark:text-gray-300">
-              3
-            </div>
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="dark:text-gray-200">In Progress</span>
-            <div className="px-2 rounded-md bg-gray-100 dark:bg-darkComponentAccent dark:text-gray-300">
-              6
-            </div>
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="dark:text-gray-200">Completed</span>
-            <div className="px-2 rounded-md bg-gray-100 dark:bg-darkComponentAccent dark:text-gray-300">
-              14
-            </div>
-          </div>
-        </div> */}
-        <Tabs />
+      <div className="flex items-center justify-between px-6 mt-4 rounded-2xl bg-white dark:bg-darkComponent">
+        <Tabs selectedTab={selectedTab} setSelectedTab={filterTasks} />
         <div className="flex gap-4">
           <button className="flex items-center gap-2 rounded-lg border dark:border-gray-400 px-3 py-1 hover:bg-primaryColor hover:text-white">
             <VscSettings className="text-xl dark:text-gray-200" />
-            <span className="text-sm dark:text-gray-200">{t("filterAndSort")}</span>
+            <span className="text-sm dark:text-gray-200">
+              {t("filterAndSort")}
+            </span>
           </button>
-          <button className="flex items-center gap-2 rounded-lg border dark:border-gray-400 px-3 py-1 dark:text-gray-200 hover:bg-primaryColor hover:text-white">
+          <button
+            className="flex items-center gap-2 rounded-lg border dark:border-gray-400 px-3 py-1 dark:text-gray-200 hover:bg-primaryColor hover:text-white"
+            onClick={() => setNewTask(true)}
+          >
             <IoMdAdd className="text-xl" />
             <span className="text-sm">{t("newTask")}</span>
           </button>
         </div>
       </div>
       <section className="grid grid-cols-4 my-4">
-        <TaskCard
+        {/* <TodoCard
           title="Footer Design"
           subTitle="Landing Page UI"
           status="To do"
@@ -156,40 +147,43 @@ const Tasks: React.FC = () => {
             </div>
           </div>
         </div>
-        <TaskCard
+        <TodoCard
           title="Footer Design"
           subTitle="Landing Page UI"
           status="In progress"
           contributors={contributors.slice(0, 2)}
         />
-        <TaskCard
+        <TodoCard
           title="Footer Design"
           subTitle="Landing Page UI"
           status="Completed"
           contributors={contributors.slice(0, 2)}
         />
-        <TaskCard
+        <TodoCard
           title="Footer Design"
           subTitle="Landing Page UI"
           status="Completed"
           contributors={contributors.slice(0, 2)}
-        />
-        {appState.tasks.map((task: Task, index: number) => (
-          <TaskCard
+        /> */}
+        {selectedTasks.map((task: Task, index: number) => (
+          <TodoCard
             key={task.id + "" + index}
-            title={`Task ${index + 1} - ${task.todo.split(" ")[0]}`}
-            subTitle={task.todo}
+            title={`${t("task")} ${index + 1} - ${task.todo.split(" ")[0]}`}
+            task={task}
             status={
               task.completed
-                ? "Completed"
+                ? t("completed")
                 : index % 2 === 0
-                ? "To do"
-                : "In progress"
+                ? t("todo")
+                : t("inProgress")
             }
             contributors={contributors.slice(1, (index % 3) + 2)}
           />
         ))}
       </section>
+      {newTask && (
+        <NewTask isOpen={newTask} onClose={() => setNewTask(false)} />
+      )}
     </Layout>
   );
 };

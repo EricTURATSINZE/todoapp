@@ -5,6 +5,7 @@ const translationsEn = {
         "websiteDesign": "Website Design",
         "limitedAccess": "Limited access",
         "allTasks": "All Tasks",
+        "task": "Task",
         "todo": "To do",
         "inProgress": "In Progress",
         "completed": "Completed",
@@ -13,6 +14,12 @@ const translationsEn = {
         "from23April": "From 23 April",
         "updated12MinAgo": "Updated 12 min ago",
         "creativeWebsite": "Creative Website",
+        "createNewTodo": "Create New Todo",
+        "updateTodo": "Update Todo",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving...",
+        "enterYourTodo": "Enter your todo",
 }
 
 export default translationsEn;
