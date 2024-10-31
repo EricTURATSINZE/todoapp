@@ -41,6 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <select
               name="theme"
               id="theme"
+              value={i18n.language}
               className="px-2 py-1 pr-4 rounded-lg outline-none focus:outline-none bg-primaryGray dark:bg-darkComponentAccent"
               onChange={(selectedValue) => {
                 store.set("language", selectedValue.target.value);
