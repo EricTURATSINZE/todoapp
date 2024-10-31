@@ -26,8 +26,8 @@ A todo application built with **React** + **TypeScript**, styled with **Tailwind
 ### Installation
 1. Clone and navigate to the project:
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd your-repo-name
+   git https://github.com/EricTURATSINZE/todoapp.git
+   cd todoapp
 
 2. Install dependencies:
    - Use `npm install` or `yarn install` to install the required packages.
