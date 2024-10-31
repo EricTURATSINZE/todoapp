@@ -2,6 +2,8 @@
 
 A todo application built with **React** + **TypeScript**, styled with **Tailwind CSS**, and powered by **Redux** and **TanStack Query** for state management and data fetching.
 
+[Live Preview](https://todoapperic.netlify.app/)
+
 ---
 
 ## 🚀 Features
@@ -31,13 +33,25 @@ A todo application built with **React** + **TypeScript**, styled with **Tailwind
 
 2. Install dependencies:
    - Use `npm install` or `yarn install` to install the required packages.
+   ```bash
+   npm install
 
 ## 🏃‍♂️ Running the App
 
 ### Development
 - Start the development server to view the app at `http://localhost:3000`:
   - Use `npm start` or `yarn start` to run the application.
+  ```bash
+   npm start
 
 ### Production
 1. Build the application for production:
    - Run `npm run build` or `yarn build` to create an optimized build.
+   ```bash
+   npm run build
+
+### Testing
+1. Run basic test for the application uing:
+   - Run `npm test`.
+   ```bash
+   npm test
