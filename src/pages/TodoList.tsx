@@ -117,7 +117,6 @@ const TodoList: React.FC = () => {
         </div>
       </div>
       <section className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 mt-4">
-        <span>Hello</span>
         {selectedTasks.map((task: Task, index: number) => (
           <TodoCard
             key={task.id + "" + index}
